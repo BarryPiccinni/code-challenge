@@ -1,35 +1,36 @@
 'use strict';
 
+const test = require('node:test');
+const assert = require('node:assert');
+
 const { isValidPassword, passwordRegex } = require('./validator');
 
-describe('validator', () =>{
-    it('Should return true if a password is valid', () => {
-        expect(isValidPassword("Password123_")).toBe(true)
-        expect(passwordRegex("Password123_")).toBe(true)
-    })
+test('Should return true if a password is valid', () => {
+    assert.strictEqual(isValidPassword("Password123_"), true);
+    assert.strictEqual(passwordRegex("Password123_"), true);
+});
 
-    it('Should have more than 8 characters', () => {
-        expect(isValidPassword("Pw1_")).toBe(false)
-        expect(passwordRegex("Pw1_")).toBe(false)
-    })
+test('Should have more than 8 characters', () => {
+    assert.strictEqual(isValidPassword("Pw1_"), false);
+    assert.strictEqual(passwordRegex("Pw1_"), false);
+});
 
-    it('Should contain a capital letter', () => {
-        expect(isValidPassword("password123_")).toBe(false)
-        expect(passwordRegex("password123_")).toBe(false)
-    })
+test('Should contain a capital letter', () => {
+    assert.strictEqual(isValidPassword("password123_"), false);
+    assert.strictEqual(passwordRegex("password123_"), false);
+});
 
-    it('Should contain a lowercase letter', () => {
-        expect(isValidPassword("PASSWORD123_")).toBe(false)
-        expect(passwordRegex("PASSWORD123_")).toBe(false)
-    })
+test('Should contain a lowercase letter', () => {
+    assert.strictEqual(isValidPassword("PASSWORD123_"), false);
+    assert.strictEqual(passwordRegex("PASSWORD123_"), false);
+});
 
-    it('Should contain a number', () => {
-        expect(isValidPassword("Password_")).toBe(false)
-        expect(passwordRegex("Password_")).toBe(false)
-    })
+test('Should contain a number', () => {
+    assert.strictEqual(isValidPassword("Password_"), false);
+    assert.strictEqual(passwordRegex("Password_"), false);
+});
 
-    it('Should contain an underscore', () => {
-        expect(isValidPassword("Password123")).toBe(false)
-        expect(passwordRegex("Password123")).toBe(false)
-    })
-})
+test('Should contain an underscore', () => {
+    assert.strictEqual(isValidPassword("Password123"), false);
+    assert.strictEqual(passwordRegex("Password123"), false);
+});
